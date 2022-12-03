@@ -9,18 +9,18 @@ private infix fun CharSequence.and(s: CharSequence) = this.toLong() and s.toLong
 
 private infix fun Long.and(s: String) = this and s.toLong()
 
-private fun Long.getScore(): Int = countTrailingZeroBits().let { bits -> if (bits > 26) bits - 5 else bits + 1 }
+private fun Long.getPriority(): Int = countTrailingZeroBits().let { bits -> if (bits > 26) bits - 5 else bits + 1 }
 
 fun main() {
 
     fun part1(input: List<String>): Int = input.sumOf { (firstCompartment, secondCompartment) ->
         val duplicate = firstCompartment and secondCompartment
-        duplicate.getScore()
+        duplicate.getPriority()
     }
 
     fun part2(input: List<String>): Int = input.windowed(3, 3).sumOf { group ->
         val badge = group[0] and group[1] and group[2]
-        badge.getScore()
+        badge.getPriority()
     }
 
     // test if implementation meets criteria from the description, like:
