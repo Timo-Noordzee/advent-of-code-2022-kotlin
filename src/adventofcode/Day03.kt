@@ -1,4 +1,7 @@
-import kotlin.system.measureTimeMillis
+package adventofcode
+
+import org.openjdk.jmh.annotations.*
+import java.util.concurrent.TimeUnit
 
 private operator fun String.component1() = subSequence(0, length / 2)
 private operator fun String.component2() = subSequence(length / 2, length)
@@ -11,27 +14,40 @@ private infix fun Long.and(s: String) = this and s.toLong()
 
 private fun Long.getPriority(): Int = countTrailingZeroBits().let { bits -> if (bits > 26) bits - 5 else bits + 1 }
 
-fun main() {
+@State(Scope.Benchmark)
+@Fork(1)
+@Warmup(iterations = 0)
+@Measurement(iterations = 10, time = 2, timeUnit = TimeUnit.SECONDS)
+class Day03 {
+    var input: List<String> = emptyList()
 
-    fun part1(input: List<String>): Int = input.sumOf { (firstCompartment, secondCompartment) ->
+    @Setup
+    fun setup() {
+        input = readInput("Day03")
+    }
+
+    @Benchmark
+    fun part1(): Int = input.sumOf { (firstCompartment, secondCompartment) ->
         val duplicate = firstCompartment and secondCompartment
         duplicate.getPriority()
     }
 
-    fun part2(input: List<String>): Int = input.windowed(3, 3).sumOf { group ->
+    @Benchmark
+    fun part2(): Int = input.windowed(3, 3).sumOf { group ->
         val badge = group[0] and group[1] and group[2]
         badge.getPriority()
     }
+}
+
+fun main() {
+    val day03 = Day03()
 
     // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day03_test")
-    check(part1(testInput) == 157)
-    check(part2(testInput) == 70)
+    day03.input = readInput("Day03_test")
+    check(day03.part1() == 157)
+    check(day03.part2() == 70)
 
-    val time = measureTimeMillis {
-        val input = readInput("Day03")
-        println(part1(input))
-        println(part2(input))
-    }
-    println("finished in ${time}ms")
+    day03.input = readInput("Day03")
+    println(day03.part1())
+    println(day03.part2())
 }

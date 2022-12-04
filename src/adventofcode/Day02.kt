@@ -1,3 +1,5 @@
+package adventofcode
+
 import kotlin.system.measureTimeMillis
 
 private operator fun String.component1() = this[0]

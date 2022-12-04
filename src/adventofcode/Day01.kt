@@ -1,3 +1,5 @@
+package adventofcode
+
 import java.util.*
 import kotlin.system.measureTimeMillis
 
