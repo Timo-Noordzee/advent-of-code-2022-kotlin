@@ -67,9 +67,13 @@ class Day05 {
     @Benchmark
     fun part2(): String {
         return solve { amount, from, to ->
-            val index = this[to].size
+            val queue = CharArray(amount)
             repeat(amount) {
-                this[to].add(index, this[from].removeLast())
+                queue[it] = this[from].removeLast()
+            }
+
+            for (i in queue.lastIndex downTo 0) {
+                this[to].add(queue[i])
             }
         }
     }
