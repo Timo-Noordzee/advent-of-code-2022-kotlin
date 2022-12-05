@@ -29,6 +29,17 @@ tasks {
 }
 
 benchmark {
+    configurations {
+        register("day03") {
+            include("Day03")
+        }
+        register("day04") {
+            include("Day04")
+        }
+        register("day05") {
+            include("Day05")
+        }
+    }
     targets {
         register("main")
     }
