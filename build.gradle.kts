@@ -42,6 +42,9 @@ benchmark {
         register("day06") {
             include("Day06")
         }
+        register("day07") {
+            include("Day07")
+        }
     }
     targets {
         register("main")
