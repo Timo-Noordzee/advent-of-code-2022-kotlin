@@ -30,23 +30,10 @@ tasks {
 
 benchmark {
     configurations {
-        register("day03") {
-            include("Day03")
-        }
-        register("day04") {
-            include("Day04")
-        }
-        register("day05") {
-            include("Day05")
-        }
-        register("day06") {
-            include("Day06")
-        }
-        register("day07") {
-            include("Day07")
-        }
-        register("day08") {
-            include("Day08")
+        for (day in 1..25) {
+            register("day${day.toString().padStart(2, '0')}") {
+                include("Day${day.toString().padStart(2, '0')}")
+            }
         }
     }
     targets {
