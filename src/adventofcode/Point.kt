@@ -24,3 +24,19 @@ operator fun Point.minus(move: Move) = copy(
     x = x - move.dx,
     y = y + move.dy
 )
+
+/**
+ * Calculate the index of a point in a grid of size m * n
+ *
+ * @param n the number of columns in the grid
+ */
+fun Point.getIndex(n: Int) = y * n + x
+
+fun Point.getNeighbors() = listOf(
+    Point(x + 1, y),
+    Point(x - 1, y),
+    Point(x, y + 1),
+    Point(x, y - 1),
+)
+
+infix fun Point.atSamePositionAs(other: Point) = x == other.x && y == other.y
