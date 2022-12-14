@@ -1,5 +1,8 @@
 package adventofcode
 
+import kotlin.math.absoluteValue
+import kotlin.math.sign
+
 /**
  * Represents a point in 2D space
  */
@@ -40,3 +43,17 @@ fun Point.getNeighbors() = listOf(
 )
 
 infix fun Point.atSamePositionAs(other: Point) = x == other.x && y == other.y
+
+infix fun Point.lineTo(other: Point): List<Point> {
+    val xDelta = (other.x - x).sign
+    val yDelta = (other.y - y).sign
+    val steps = maxOf((x - other.x).absoluteValue, (y - other.y).absoluteValue)
+    return (1..steps).scan(this) { previous, _ -> Point(previous.x + xDelta, previous.y + yDelta) }
+}
+
+val Point.left get() = Point(x - 1, y)
+
+val Point.right get() = Point(x + 1, y)
+
+// Convert "x,y" to Point
+fun Point(xAndY: String) = xAndY.split(',').let { Point(it[0].toInt(), it[1].toInt()) }
