@@ -29,3 +29,5 @@ fun Iterable<IntRange>.merge(): List<IntRange> {
     }
     return stack
 }
+
+fun String.isNumeric() = removePrefix("-").all { char -> char.isDigit() }
