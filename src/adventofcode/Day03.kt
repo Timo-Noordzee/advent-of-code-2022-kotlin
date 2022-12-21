@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit
 private operator fun String.component1() = subSequence(0, length / 2)
 private operator fun String.component2() = subSequence(length / 2, length)
 
-fun CharSequence.toLong() = this.fold(0L) { total, char -> total or (1L shl char - 'a') }
+private fun CharSequence.toLong() = this.fold(0L) { total, char -> total or (1L shl char - 'a') }
 
 private infix fun CharSequence.and(s: CharSequence) = this.toLong() and s.toLong()
 
