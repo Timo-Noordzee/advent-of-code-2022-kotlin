@@ -42,6 +42,17 @@ fun Point.getNeighbors() = listOf(
     Point(x, y - 1),
 )
 
+fun Point.getAllNeighbors() = listOf(
+    Point(x, y + 1),
+    Point(x + 1, y + 1),
+    Point(x + 1, y),
+    Point(x + 1, y - 1),
+    Point(x, y - 1),
+    Point(x - 1, y - 1),
+    Point(x - 1, y),
+    Point(x - 1, y + 1)
+)
+
 infix fun Point.atSamePositionAs(other: Point) = x == other.x && y == other.y
 
 infix fun Point.lineTo(other: Point): List<Point> {
