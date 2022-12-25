@@ -1,7 +1,7 @@
 package adventofcode
 
-import org.openjdk.jmh.annotations.Benchmark
-import org.openjdk.jmh.annotations.Setup
+import org.openjdk.jmh.annotations.*
+import java.util.concurrent.TimeUnit
 
 private operator fun Valley.contains(point: Point): Boolean = point.x in xBound && point.y in yBound
 
@@ -54,6 +54,10 @@ private data class Step(val minute: Int, val location: Point) {
     fun next(newLocation: Point = location) = Step(minute + 1, newLocation)
 }
 
+@State(Scope.Benchmark)
+@Fork(1)
+@Warmup(iterations = 0)
+@Measurement(iterations = 10, time = 2, timeUnit = TimeUnit.SECONDS)
 class Day24 {
 
     var input: List<String> = emptyList()
