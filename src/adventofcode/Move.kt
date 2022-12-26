@@ -2,7 +2,7 @@ package adventofcode
 
 import kotlin.math.abs
 
-class Move(val dx: Int, val dy: Int) {
+data class Move(val dx: Int, val dy: Int) {
     override fun toString() = "(dx=$dx, dy=$dy)"
 }
 
